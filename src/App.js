@@ -1,23 +1,32 @@
-import logo from './logo.svg';
+import React from 'react';
+import Header from './Components/Header/Header';
+import AstronautContainer from './Components/Astronaut/AstronautContainer';
 import './App.css';
 
-function App() {
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import AstronautDetails from './Components/Astronaut/AstronautDetails';
+import { Container } from 'semantic-ui-react';
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <BrowserRouter>
+
+        <Header />
+
+        {/* <a href='/astronauts'>fdfsd</a> */}
+        <Container>
+          <Switch>
+
+            <Route path='/astronaut/:id/:name' exact>
+              <AstronautDetails />
+            </Route>
+            <Route path='/astronauts' exact>
+              <AstronautContainer />
+            </Route>
+          </Switch>
+        </Container>
+      </BrowserRouter>
     </div>
   );
 }
