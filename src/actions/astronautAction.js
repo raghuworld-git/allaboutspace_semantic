@@ -3,7 +3,7 @@ import { ASTRONAUT, ASTRONAUT_BY_ID } from './types';
 
 export const getAstronauts = (limit = 6, offset = 0) => {
     return async (dispatch) => {
-        const res = await astronautAPI.get(`/?limit=${limit}&offset=${offset}&ordering=-name`);
+        const res = await astronautAPI.get(`/?limit=${limit}&offset=${offset}&ordering=name`);
         dispatch({
             type: ASTRONAUT,
             payload: {
@@ -15,7 +15,7 @@ export const getAstronauts = (limit = 6, offset = 0) => {
 
 export const getAstronautById = (id) => {
     return async (dispatch) => {
-        const res = await astronautAPI.get(`/${id}`);
+        const res = await astronautAPI.get(`/${id}/?mode=detailed`);
         dispatch({
             type: ASTRONAUT_BY_ID,
             payload: res.data
