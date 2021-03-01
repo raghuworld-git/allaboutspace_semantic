@@ -26,3 +26,27 @@
     height: 22em !important;
     object-fit: fill !important;
   }
+
+  .astronautDetails_detailsCard{
+    min-height: 28.4em !important;
+  }
+
+
+  .card {
+    font-weight: normal !important;
+    font-size: medium;
+    /* background-color: black !important;
+    color: white !important; */
+  }
+
+  /* ui.card,
+.ui.cards>.card {
+  background-color: #D9499A !important
+
+}
+
+
+  table{
+    background-color: black !important;
+    color: white !important;
+  } */

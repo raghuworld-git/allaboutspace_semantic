@@ -12,7 +12,7 @@ const SocialLinksComponent = ({ instagram = null, twitter = null, wiki = null, w
             {wiki &&
 
                 <a className="ui  button" href={wiki} target='_blank' rel="noreferrer">
-                    <i class="wikipedia w icon"></i>
+                    <i className="wikipedia w icon"></i>
                 Wiki
          </a>
             }
@@ -24,7 +24,7 @@ const SocialLinksComponent = ({ instagram = null, twitter = null, wiki = null, w
             }
             {webLink &&
                 <a className="ui  button" href={webLink} target='_blank' rel="noreferrer">
-                    <i class="linkify icon"></i>
+                    <i className="linkify icon"></i>
                 Website
                 </a>
 
