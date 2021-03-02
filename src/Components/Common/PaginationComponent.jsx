@@ -5,10 +5,10 @@ import { Pagination } from 'semantic-ui-react';
 const PaginationComponent = ({ itemsPerPage, totalCount, pageChangeHandler }) => {
 
     const [activePage, setActivePage] = useState(1);
-    const [pageCount, setPageCount] = useState(Math.ceil(totalCount / itemsPerPage))
+    const [pageCount, setPageCount] = useState(Math.round(totalCount / itemsPerPage))
 
-    const onPageChangeHandler = (pageNumber) => {
-        console.log(pageNumber);
+    const onPageChangeHandler = (event,data) => {
+       pageChangeHandler(data.activePage);
     }
     return (
         <>
@@ -30,7 +30,7 @@ const PaginationComponent = ({ itemsPerPage, totalCount, pageChangeHandler }) =>
 
             /> */}
 
-            <Pagination size='large' defaultActivePage={5} totalPages={pageCount} />
+            <Pagination size='large' defaultActivePage={1} totalPages={pageCount} onPageChange={onPageChangeHandler} />
         </>
     )
 }

@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import { Card, Container, Grid, Segment, Table } from 'semantic-ui-react';
 import SimpleAstronautCard from './SimpleAstronautCard';
 import SocialLinksComponent from '../Common/SocialLinksComponent';
+import PageTabTitle from '../Common/PageTabTitle';
+
 import './Astronaut.css';
 import SmallCards from '../Common/SmallCards';
 
@@ -29,10 +31,9 @@ const AstronautDetails = ({ astronautDetails, getAstronautById }) => {
         return { id, image, name, status: status.abbrev }
     });
 
-    console.log(flightDetailsFormated);
-    console.log(astronautDetails);
     return (
         <Container>
+            <PageTabTitle title={`${astroName}`}/>
             <Grid container centered stackable>
                 <Grid.Row>
                     <Grid.Column computer={5} tablet={5} mobile={16}>

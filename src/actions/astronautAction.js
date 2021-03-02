@@ -1,7 +1,7 @@
 import { astronautAPI } from '../api/astronautAPI';
-import { ASTRONAUT, ASTRONAUT_BY_ID } from './types';
+import { ASTRONAUT, ASTRONAUT_BY_ID,ASTRONAUT_CURR_PAGE } from './types';
 
-export const getAstronauts = (limit = 6, offset = 0) => {
+export const getAstronauts = (limit = 8, offset = 0) => {
     return async (dispatch) => {
         const res = await astronautAPI.get(`/?limit=${limit}&offset=${offset}&ordering=name`);
         dispatch({
@@ -22,3 +22,12 @@ export const getAstronautById = (id) => {
         });
     };
 };
+
+export const astronautCurrentPageAction = (page)=>{
+    return async (dispatch) => {
+        dispatch({
+            type: ASTRONAUT_CURR_PAGE,
+            payload: page
+        });
+    };    
+}

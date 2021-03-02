@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Components/Header/Header';
 import AstronautContainer from './Components/Astronaut/AstronautContainer';
+import PageTabTitle from './Components/Common/PageTabTitle'
 import './App.css';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
@@ -10,6 +11,7 @@ import { Container } from 'semantic-ui-react';
 const App = () => {
   return (
     <div className="app">
+      <PageTabTitle title='All About Space'/>
       <BrowserRouter>
 
         <Header />

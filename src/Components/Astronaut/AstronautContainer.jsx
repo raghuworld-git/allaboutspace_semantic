@@ -4,9 +4,10 @@ import { Container, Grid, Header } from 'semantic-ui-react';
 import SimpleAstronautCard from './SimpleAstronautCard';
 
 import { connect } from 'react-redux';
-import { getAstronauts } from '../../actions/astronautAction';
+import { getAstronauts ,astronautCurrentPageAction} from '../../actions/astronautAction';
 import LoaderComponent from '../Common/LoaderComponent';
 import PaginationComponent from '../Common/PaginationComponent';
+import PageTabTitle from '../Common/PageTabTitle';
 
 import './Astronaut.css';
 
@@ -14,7 +15,7 @@ import './Astronaut.css';
 
 const itemsPerPage = 8;
 
-const AstronautContainer = ({ getAstronauts, astronauts }) => {
+const AstronautContainer = ({ getAstronauts, astronauts,astronautCurrentPage }) => {
 
 
     useEffect(() => {
@@ -28,11 +29,15 @@ const AstronautContainer = ({ getAstronauts, astronauts }) => {
 
     }
 
-    const pageChangeHandler = () => {
-
+    const pageChangeHandler = (selectedPage) => {
+        const offset = Math.ceil(selectedPage * itemsPerPage);
+        getAstronauts(itemsPerPage,offset)
+        astronautCurrentPageAction(selectedPage);
+        console.log(astronautCurrentPage);
     }
 
     return (<div>
+        <PageTabTitle title='Astronauts'/>
         <Container>
             <Header dividing icon textAlign='center' as='h2'>
                 Astronauts
@@ -65,8 +70,9 @@ const AstronautContainer = ({ getAstronauts, astronauts }) => {
 
 const mapStateToProps = (state) => {
     return {
-        astronauts: state.astronauts
+        astronauts: state.astronauts,
+        astronautCurrentPage : state.astronautCurrentPage
     }
 }
 
-export default connect(mapStateToProps, { getAstronauts })(AstronautContainer)
+export default connect(mapStateToProps, { getAstronauts,astronautCurrentPageAction })(AstronautContainer)
