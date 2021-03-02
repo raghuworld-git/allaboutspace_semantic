@@ -84,7 +84,7 @@ const AstronautDetails = ({ astronautDetails, getAstronautById }) => {
                     <Grid.Column textAlign='center'>
                         <Segment>
                             <h3>Launches</h3>
-                            <SmallCards items={flightDetailsFormated} />
+                            <SmallCards items={flightDetailsFormated} emptyMessage='Flight detalils not available' />
                         </Segment>
                     </Grid.Column>
                 </Grid.Row>

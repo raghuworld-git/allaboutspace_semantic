@@ -2,9 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { Card } from 'semantic-ui-react'
 
-const SmallCards = ({ items, link = true }) => {
+const SmallCards = ({ items, emptyMessage=null }) => {
 
-    const cardItems = items.map(({ image, status, name, id }) => {
+    let cardItems = items.map(({ image, status, name, id }) => {
         const statusColor = status === 'Success' ? 'green' : (status === 'Failure' ? 'red' : 'yellow');
 
         return (
@@ -19,6 +19,10 @@ const SmallCards = ({ items, link = true }) => {
             </Card>
         )
     });
+
+    if(items.length<=0 && emptyMessage){
+        cardItems=emptyMessage;
+    }
 
     return (
         <Card.Group doubling itemsPerRow='5' centered>

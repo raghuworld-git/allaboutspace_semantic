@@ -23,8 +23,8 @@ export const getAstronautById = (id) => {
     };
 };
 
-export const astronautCurrentPageAction = (page)=>{
-    return async (dispatch) => {
+export const setAstronautCurrentPage = (page)=>{
+    return  (dispatch) => {
         dispatch({
             type: ASTRONAUT_CURR_PAGE,
             payload: page

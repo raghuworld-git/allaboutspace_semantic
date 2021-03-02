@@ -18,7 +18,7 @@ const SimpleAstronautCard = ({ imageURL, text, nationality = null, href = '' }) 
         );
     return (
         <>
-            {href === '' || !href ? loadSimpleCard : <Link to={href}>
+            {href === '' || !href ? loadSimpleCard : <Link to={href} target='_blank'>
                 {loadSimpleCard}
             </Link>}
         </>

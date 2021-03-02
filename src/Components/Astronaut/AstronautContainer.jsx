@@ -4,7 +4,7 @@ import { Container, Grid, Header } from 'semantic-ui-react';
 import SimpleAstronautCard from './SimpleAstronautCard';
 
 import { connect } from 'react-redux';
-import { getAstronauts ,astronautCurrentPageAction} from '../../actions/astronautAction';
+import { getAstronauts ,setAstronautCurrentPage} from '../../actions/astronautAction';
 import LoaderComponent from '../Common/LoaderComponent';
 import PaginationComponent from '../Common/PaginationComponent';
 import PageTabTitle from '../Common/PageTabTitle';
@@ -15,11 +15,20 @@ import './Astronaut.css';
 
 const itemsPerPage = 8;
 
-const AstronautContainer = ({ getAstronauts, astronauts,astronautCurrentPage }) => {
+const AstronautContainer = ({ getAstronauts, astronauts,astronautCurrentPage,setAstronautCurrentPage }) => {
+
+    
+    const pageChangeHandler = (selectedPage) => {
+        selectedPage = (selectedPage === null || selectedPage ===undefined || selectedPage ===0? 1:selectedPage);
+        const offset = Math.ceil(selectedPage * itemsPerPage);
+        getAstronauts(itemsPerPage,offset)
+        setAstronautCurrentPage(selectedPage);      
+    }
 
 
     useEffect(() => {
         getAstronauts(itemsPerPage);
+        // pageChangeHandler(astronautCurrentPage);
     }, []);
 
     const { data, count } = astronauts;
@@ -27,13 +36,6 @@ const AstronautContainer = ({ getAstronauts, astronauts,astronautCurrentPage }) 
     if (!data) {
         return <LoaderComponent loadingText='Launching Astronauts for you' />;
 
-    }
-
-    const pageChangeHandler = (selectedPage) => {
-        const offset = Math.ceil(selectedPage * itemsPerPage);
-        getAstronauts(itemsPerPage,offset)
-        astronautCurrentPageAction(selectedPage);
-        console.log(astronautCurrentPage);
     }
 
     return (<div>
@@ -59,7 +61,7 @@ const AstronautContainer = ({ getAstronauts, astronauts,astronautCurrentPage }) 
             <Grid container>
                 <Grid.Row>
                     <Grid.Column textAlign='center'>
-                        <PaginationComponent itemsPerPage={itemsPerPage} totalCount={count} pageChangeHandler={pageChangeHandler} />
+                        <PaginationComponent itemsPerPage={itemsPerPage} totalCount={count} pageChangeHandler={pageChangeHandler} currentActivePage={astronautCurrentPage} />
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
@@ -75,4 +77,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getAstronauts,astronautCurrentPageAction })(AstronautContainer)
+export default connect(mapStateToProps, { getAstronauts,setAstronautCurrentPage })(AstronautContainer)
