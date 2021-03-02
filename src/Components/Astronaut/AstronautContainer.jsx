@@ -6,8 +6,10 @@ import SimpleAstronautCard from './SimpleAstronautCard';
 import { connect } from 'react-redux';
 import { getAstronauts } from '../../actions/astronautAction';
 import LoaderComponent from '../Common/LoaderComponent';
+import PaginationComponent from '../Common/PaginationComponent';
 
 import './Astronaut.css';
+
 
 
 const itemsPerPage = 8;
@@ -19,10 +21,14 @@ const AstronautContainer = ({ getAstronauts, astronauts }) => {
         getAstronauts(itemsPerPage);
     }, []);
 
-    const { data } = astronauts;
+    const { data, count } = astronauts;
 
     if (!data) {
         return <LoaderComponent loadingText='Launching Astronauts for you' />;
+
+    }
+
+    const pageChangeHandler = () => {
 
     }
 
@@ -31,6 +37,7 @@ const AstronautContainer = ({ getAstronauts, astronauts }) => {
             <Header dividing icon textAlign='center' as='h2'>
                 Astronauts
             </Header>
+            {/* <AstronautFilterAccordian /> */}
             {/* <Grid container >
                 <Grid.Column textAlign='center'>
                     <InputComponent placeholder='Search Astronauts...' searchHandler={searchHandler} />
@@ -42,6 +49,14 @@ const AstronautContainer = ({ getAstronauts, astronauts }) => {
                         <SimpleAstronautCard imageURL={profile_image} text={name} href={`/astronaut/${id}/${name}`} />
                     </Grid.Column>
                 })}
+            </Grid>
+
+            <Grid container>
+                <Grid.Row>
+                    <Grid.Column textAlign='center'>
+                        <PaginationComponent itemsPerPage={itemsPerPage} totalCount={count} pageChangeHandler={pageChangeHandler} />
+                    </Grid.Column>
+                </Grid.Row>
             </Grid>
         </Container>
     </div>

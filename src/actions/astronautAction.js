@@ -7,7 +7,7 @@ export const getAstronauts = (limit = 6, offset = 0) => {
         dispatch({
             type: ASTRONAUT,
             payload: {
-                count: res.data.count, data: res.data.results
+                count: res.data.count, data: res.data.results, next: res.data.next, previous: res.data.previous
             }
         });
     };

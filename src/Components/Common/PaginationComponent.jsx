@@ -1,24 +1,37 @@
-import React from 'react';
-import { Pagination, Icon } from 'semantic-ui-react'
+import React, { useState } from 'react';
+import ReactPaginate from 'react-paginate';
+import { Pagination } from 'semantic-ui-react';
 
-const PaginationComponent = ({ totaCount, defaultActivePage = 1, pageChangeEvent, itemsPerPage }) => {
+const PaginationComponent = ({ itemsPerPage, totalCount, pageChangeHandler }) => {
 
-    const onPageChangeHandle = (event, data) => {
-        pageChangeEvent(data.activePage * itemsPerPage)
+    const [activePage, setActivePage] = useState(1);
+    const [pageCount, setPageCount] = useState(Math.ceil(totalCount / itemsPerPage))
+
+    const onPageChangeHandler = (pageNumber) => {
+        console.log(pageNumber);
     }
-    const totalpageForPagination = Math.ceil(totaCount / itemsPerPage)
     return (
-        <div>
-            <Pagination
-                defaultActivePage={defaultActivePage}
-                firstItem={{ content: <Icon name='angle double left' />, icon: true }}
-                lastItem={{ content: <Icon name='angle double right' />, icon: true }}
-                prevItem={{ content: <Icon name='angle left' />, icon: true }}
-                nextItem={{ content: <Icon name='angle right' />, icon: true }}
-                totalPages={totalpageForPagination}
-                onPageChange={onPageChangeHandle}
-            />
-        </div>
+        <>
+            {/* <ReactPaginate
+                previousLabel={'previous'}
+                nextLabel={'next'}
+                breakLabel={'...'}
+                breakClassName={'break-me'}
+                pageCount={pageCount}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={onPageChangeHandler}
+                containerClassName={'ui pagination inverted menu'}
+
+                pageLinkClassName={'item'}
+                activeClassName={'active'}
+                initialPage={1}
+
+
+            /> */}
+
+            <Pagination size='large' defaultActivePage={5} totalPages={pageCount} />
+        </>
     )
 }
 
