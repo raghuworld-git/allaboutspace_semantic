@@ -33,7 +33,7 @@ const AstronautDetails = ({ astronautDetails, getAstronautById }) => {
 
     return (
         <Container>
-            <PageTabTitle title={`${astroName}`}/>
+            <PageTabTitle title={`${astroName}`} />
             <Grid container centered stackable>
                 <Grid.Row>
                     <Grid.Column computer={5} tablet={5} mobile={16}>

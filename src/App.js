@@ -11,7 +11,7 @@ import { Container } from 'semantic-ui-react';
 const App = () => {
   return (
     <div className="app">
-      <PageTabTitle title='All About Space'/>
+      <PageTabTitle title='All About Space' />
       <BrowserRouter>
 
         <Header />
@@ -23,7 +23,7 @@ const App = () => {
             <Route path='/astronaut/:id/:name' exact>
               <AstronautDetails />
             </Route>
-            <Route path='/astronauts' exact>
+            <Route path='/astronauts/:page?' exact>
               <AstronautContainer />
             </Route>
           </Switch>

@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import ReactPaginate from 'react-paginate';
+import React from 'react';
 import { Pagination } from 'semantic-ui-react';
 
-const PaginationComponent = ({ itemsPerPage, totalCount, pageChangeHandler,currentActivePage }) => {
-    
+const PaginationComponent = ({ itemsPerPage, totalCount, pageChangeHandler, currentActivePage }) => {
+
     const pageCount = Math.round(totalCount / itemsPerPage);
 
-    const onPageChangeHandler = (event,data) => {
-       pageChangeHandler(data.activePage);
+    const onPageChangeHandler = (event, data) => {
+        pageChangeHandler(data.activePage);
     }
     return (
-        <>           
-            <Pagination size='large' defaultActivePage={1} totalPages={pageCount} onPageChange={onPageChangeHandler}  /> 
+        <>
+            <Pagination size='large' defaultActivePage={currentActivePage} totalPages={pageCount} pointing
+                secondary onPageChange={onPageChangeHandler} />
         </>
     )
 }

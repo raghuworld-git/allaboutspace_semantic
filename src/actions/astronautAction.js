@@ -1,5 +1,5 @@
 import { astronautAPI } from '../api/astronautAPI';
-import { ASTRONAUT, ASTRONAUT_BY_ID,ASTRONAUT_CURR_PAGE } from './types';
+import { ASTRONAUT, ASTRONAUT_BY_ID } from './types';
 
 export const getAstronauts = (limit = 8, offset = 0) => {
     return async (dispatch) => {
@@ -22,12 +22,3 @@ export const getAstronautById = (id) => {
         });
     };
 };
-
-export const setAstronautCurrentPage = (page)=>{
-    return  (dispatch) => {
-        dispatch({
-            type: ASTRONAUT_CURR_PAGE,
-            payload: page
-        });
-    };    
-}

@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { Container, Grid, Header } from 'semantic-ui-react';
+import { useParams, useHistory } from 'react-router-dom';
 
 import SimpleAstronautCard from './SimpleAstronautCard';
 
 import { connect } from 'react-redux';
-import { getAstronauts ,setAstronautCurrentPage} from '../../actions/astronautAction';
+import { getAstronauts } from '../../actions/astronautAction';
 import LoaderComponent from '../Common/LoaderComponent';
 import PaginationComponent from '../Common/PaginationComponent';
 import PageTabTitle from '../Common/PageTabTitle';
@@ -15,31 +16,43 @@ import './Astronaut.css';
 
 const itemsPerPage = 8;
 
-const AstronautContainer = ({ getAstronauts, astronauts,astronautCurrentPage,setAstronautCurrentPage }) => {
+const AstronautContainer = ({ getAstronauts, astronauts }) => {
 
-    
+    const history = useHistory();
+    const { page } = useParams();
+
+
     const pageChangeHandler = (selectedPage) => {
-        selectedPage = (selectedPage === null || selectedPage ===undefined || selectedPage ===0? 1:selectedPage);
+
+        selectedPage = (selectedPage === null || selectedPage === undefined || selectedPage === 0 ? 1 : selectedPage);
         const offset = Math.ceil(selectedPage * itemsPerPage);
-        getAstronauts(itemsPerPage,offset)
-        setAstronautCurrentPage(selectedPage);      
+        getAstronauts(itemsPerPage, offset)
+
+        history.push(`/astronauts/${selectedPage}`);
+
     }
 
 
     useEffect(() => {
-        getAstronauts(itemsPerPage);
-        // pageChangeHandler(astronautCurrentPage);
+
+        if (page) {
+            const offset = Math.ceil(page * itemsPerPage);
+            getAstronauts(itemsPerPage, offset);
+        }
+        else {
+            getAstronauts(itemsPerPage);
+        }
     }, []);
 
     const { data, count } = astronauts;
 
     if (!data) {
-        return <LoaderComponent loadingText='Launching Astronauts for you' />;
+        return <LoaderComponent loadingText='Launching Astronauts' />;
 
     }
 
     return (<div>
-        <PageTabTitle title='Astronauts'/>
+        <PageTabTitle title='Astronauts' />
         <Container>
             <Header dividing icon textAlign='center' as='h2'>
                 Astronauts
@@ -61,7 +74,7 @@ const AstronautContainer = ({ getAstronauts, astronauts,astronautCurrentPage,set
             <Grid container>
                 <Grid.Row>
                     <Grid.Column textAlign='center'>
-                        <PaginationComponent itemsPerPage={itemsPerPage} totalCount={count} pageChangeHandler={pageChangeHandler} currentActivePage={astronautCurrentPage} />
+                        <PaginationComponent itemsPerPage={itemsPerPage} totalCount={count} pageChangeHandler={pageChangeHandler} currentActivePage={page} />
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
@@ -73,8 +86,8 @@ const AstronautContainer = ({ getAstronauts, astronauts,astronautCurrentPage,set
 const mapStateToProps = (state) => {
     return {
         astronauts: state.astronauts,
-        astronautCurrentPage : state.astronautCurrentPage
+        astronautCurrentPage: state.astronautCurrentPage
     }
 }
 
-export default connect(mapStateToProps, { getAstronauts,setAstronautCurrentPage })(AstronautContainer)
+export default connect(mapStateToProps, { getAstronauts })(AstronautContainer)
