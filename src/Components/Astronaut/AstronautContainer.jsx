@@ -24,7 +24,7 @@ const AstronautContainer = ({ getAstronauts, astronauts }) => {
 
     const pageChangeHandler = (selectedPage) => {
 
-        selectedPage = (selectedPage === null || selectedPage === undefined || selectedPage === 0 ? 1 : selectedPage);
+        selectedPage = (selectedPage === null || selectedPage === undefined || selectedPage === 0 ? 0 : selectedPage - 1);
         const offset = Math.ceil(selectedPage * itemsPerPage);
         getAstronauts(itemsPerPage, offset)
 

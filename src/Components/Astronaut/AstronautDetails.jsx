@@ -33,7 +33,7 @@ const AstronautDetails = ({ astronautDetails, getAstronautById }) => {
 
     return (
         <Container>
-            <PageTabTitle title={`${astroName}`} />
+            <PageTabTitle title={`Astronaut | ${astroName}`} />
             <Grid container centered stackable>
                 <Grid.Row>
                     <Grid.Column computer={5} tablet={5} mobile={16}>
@@ -44,7 +44,7 @@ const AstronautDetails = ({ astronautDetails, getAstronautById }) => {
                         <Card fluid className='astronautDetails_detailsCard' color='black'>
                             <Card.Content textAlign='center'>
                                 <h2>{astroName} <span style={{ fontSize: 'large' }}> ({status.name})</span></h2>
-                                <Link to={`/agencies/${agency.id}`} className='ui black medium button'>Agency: {agency.name}</Link>
+                                <Link to={`/agencies/${agency.id}/${agency.name}`} className='ui black medium button'>Agency: {agency.name}</Link>
                                 <br /><br />
                                 <Table textAlign='center'>
                                     <Table.Body >

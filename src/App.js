@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Components/Header/Header';
 import AstronautContainer from './Components/Astronaut/AstronautContainer';
+import AgencyDetails from './Components/Agencies/AgencyDetails';
 import PageTabTitle from './Components/Common/PageTabTitle'
 import './App.css';
 
@@ -25,6 +26,10 @@ const App = () => {
             </Route>
             <Route path='/astronauts/:page?' exact>
               <AstronautContainer />
+            </Route>
+
+            <Route path='/agencies/:id/:name?' exact>
+              <AgencyDetails />
             </Route>
           </Switch>
         </Container>
